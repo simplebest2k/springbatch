@@ -48,8 +48,11 @@ public class HelloJobConfiguration {
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) {
+                        var param = contribution.getStepExecution().getJobExecution().getJobParameters();
+
                         System.out.println(" ======================");
-                        System.out.println(">> hello Spring batch!!");
+                        System.out.println(">> param(user) : " + param.getString("name"));
+                        System.out.println(">> param(date) : " + param.getDate("date"));
                         System.out.println(" ======================");
                         return RepeatStatus.FINISHED;
                     }
